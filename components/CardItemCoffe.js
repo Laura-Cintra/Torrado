@@ -2,10 +2,9 @@ import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import colors from "../theme/colors";
 import { imagens } from '../assets/images';
 
-
 export default function CardItemCoffe({ produto, aoAdicionar }) {
     console.log("Imagem esperada:", produto.image);
-console.log("Imagem encontrada:", imagens[produto.image]);
+    console.log("Imagem encontrada:", imagens[produto.image]);
 
     return (
         <View style={styles.card}>
@@ -30,7 +29,8 @@ const styles = StyleSheet.create({
     card: {
         flexDirection: 'row',
         backgroundColor: colors.branco,
-        borderRadius: 10,
+        marginRight: 10,
+        borderRadius: "20px",
         padding: 12,
         marginBottom: 12,
         shadowColor: '#000',
@@ -39,8 +39,8 @@ const styles = StyleSheet.create({
         elevation: 2,
     },
     imagem: {
-        width: 80,
-        height: 80,
+        width: 70,
+        height: 70,
         marginRight: 12,
     },
     info: {
@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
         marginTop: 8,
         backgroundColor: colors.primary,
         padding: 8,
-        borderRadius: 6,
+        borderRadius: "8px",
         alignItems: 'center',
     },
     botaoTexto: {

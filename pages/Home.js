@@ -6,6 +6,7 @@ import colors from "../theme/colors";
 import CardItemCoffe from "../components/CardItemCoffe";
 import produtosJson from '../data/produtos.json'
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 export default function Home() {
     const [lmvBuscaLMV, setlmvBuscaLMV] = useState('')
@@ -36,14 +37,18 @@ export default function Home() {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.titulo}>Bem-vindo à Torrado!</Text>
-            <TextInput
-                style={styles.search}
-                placeholder="Buscar cafés ou descrições..."
-                placeholderTextColor={colors.cinzaClaro}
-                value={lmvBuscaLMV}
-                onChange={setlmvBuscaLMV}
-            />
+            <Text style={styles.titulo}>Bem-vindo ao Torrado!</Text>
+            <View style={styles.containerSearch}>
+                <Ionicons name="search" size={20} color={colors.branco} style={styles.searchIcon} />
+                <TextInput
+                    style={styles.inputSearch}
+                    placeholder="Buscar cafés ou descrições..."
+                    placeholderTextColor={colors.cinzaEscuro}
+                    value={lmvBuscaLMV}
+                    onChangeText={setlmvBuscaLMV}
+                />
+
+            </View>
             <FlatList
                 data={lmvProdutosLMV}
                 keyExtractor={(item) => item.id.toString()}
@@ -73,14 +78,26 @@ const styles = StyleSheet.create({
         marginBottom: 16,
         color: colors.texto,
     },
-    search: {
-        backgroundColor: colors.branco,
-        borderRadius: 8,
-        padding: 12,
+    containerSearch: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        width: '100%',
+        height: 50,
+        backgroundColor: colors.marromClaro,
+        borderRadius: "20px",
+        paddingHorizontal: 12,
         marginBottom: 16,
-        borderColor: colors.cinzaClaro,
-        borderWidth: 1,
-        color: colors.texto,
+        color: colors.texto
+        // borderColor: colors.texto,
+        // borderWidth: 1,
+    },
+    inputSearch: {
+        flex: 1,
+        marginLeft: 8,
+        color: colors.branco,
+        borderWidth: 0,
+        height: '100%',
+        outlineStyle: 'none'
     },
     lista: {
         paddingBottom: 100,
