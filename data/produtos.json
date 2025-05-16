@@ -1,0 +1,51 @@
+[
+    {
+        "id": 1,
+        "name": "Café Expresso",
+        "description": "Um café forte e concentrado para começar o dia.",
+        "image": "espresso.avif",
+        "price": 6.5
+    },
+    {
+        "id": 2,
+        "name": "Cappuccino",
+        "description": "Café com leite vaporizado e espuma cremosa.",
+        "image": "cappuccino.png",
+        "price": 8.0
+    },
+    {
+        "id": 3,
+        "name": "Latte",
+        "description": "Café suave com leite vaporizado.",
+        "image": "latte.png",
+        "price": 7.5
+    },
+    {
+        "id": 4,
+        "name": "Mocha",
+        "description": "Café com chocolate e leite vaporizado.",
+        "image": "mocha.png",
+        "price": 9.0
+    },
+    {
+        "id": 5,
+        "name": "Macchiato",
+        "description": "Café expresso com uma pequena quantidade de leite vaporizado.",
+        "image": "macchiato.jpg",
+        "price": 7.0
+    },
+    {
+        "id": 6,
+        "name": "Affogato",
+        "description": "Uma bola de sorvete de baunilha mergulhada em café expresso.",
+        "image": "affogato.png",
+        "price": 10.0
+    },
+    {
+        "id": 7,
+        "name": "Frappuccino",
+        "description": "Bebida gelada à base de café com creme e calda.",
+        "image": "frappuccino.png",
+        "price": 9.5
+    }
+]
