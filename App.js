@@ -6,6 +6,7 @@ import Cart from './pages/Cart';
 import { Ionicons } from '@expo/vector-icons';
 import { CartContext, CartProvider } from './context/CartContext';
 import { StatusBar } from 'expo-status-bar';
+import colors from './theme/colors';
 
 const Tab = createBottomTabNavigator();
 
@@ -16,9 +17,9 @@ function MainTabs() {
     <Tab.Navigator
       screenOptions={({ route }) => ({
         headerShown: false,
-        tabBarActiveTintColor: '#a0522d',
-        tabBarInactiveTintColor: '#d3c4b7',
-        tabBarStyle: { backgroundColor: '#f4ede4' },
+        tabBarActiveTintColor: colors.primary,
+        tabBarInactiveTintColor: colors.cinzaClaro,
+        tabBarStyle: { backgroundColor: colors.fundo },
         tabBarIcon: ({ color, size }) => {
           let iconName;
           if (route.name === 'Home') {
@@ -46,7 +47,7 @@ export default function App() {
   return (
     <CartProvider>
       <NavigationContainer>
-        <StatusBar style="dark" backgroundColor="#f4ede4" />
+        <StatusBar style="dark" backgroundColor={colors.fundo} />
         <MainTabs />
       </NavigationContainer>
     </CartProvider>
