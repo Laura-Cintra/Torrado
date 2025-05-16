@@ -3,11 +3,14 @@ import colors from "../theme/colors";
 import { imagens } from '../assets/images';
 
 
-export default function CardItemCoffe({produto, aoAdicionar}) {
+export default function CardItemCoffe({ produto, aoAdicionar }) {
+    console.log("Imagem esperada:", produto.image);
+console.log("Imagem encontrada:", imagens[produto.image]);
+
     return (
         <View style={styles.card}>
             <Image
-                source={imagens[produto.imagem]}
+                source={imagens[produto.image]}
                 style={styles.imagem}
                 resizeMode="contain"
             />
@@ -24,50 +27,50 @@ export default function CardItemCoffe({produto, aoAdicionar}) {
 }
 
 const styles = StyleSheet.create({
-  card: {
-    flexDirection: 'row',
-    backgroundColor: colors.branco,
-    borderRadius: 10,
-    padding: 12,
-    marginBottom: 12,
-    shadowColor: '#000',
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 2,
-  },
-  imagem: {
-    width: 80,
-    height: 80,
-    marginRight: 12,
-  },
-  info: {
-    flex: 1,
-    justifyContent: 'space-between',
-  },
-  nome: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: colors.texto,
-  },
-  descricao: {
-    color: colors.cinza,
-    fontSize: 14,
-  },
-  preco: {
-    fontSize: 16,
-    fontWeight: '600',
-    color: colors.primary,
-    marginTop: 4,
-  },
-  botao: {
-    marginTop: 8,
-    backgroundColor: colors.primary,
-    padding: 8,
-    borderRadius: 6,
-    alignItems: 'center',
-  },
-  botaoTexto: {
-    color: colors.branco,
-    fontWeight: 'bold',
-  },
+    card: {
+        flexDirection: 'row',
+        backgroundColor: colors.branco,
+        borderRadius: 10,
+        padding: 12,
+        marginBottom: 12,
+        shadowColor: '#000',
+        shadowOpacity: 0.1,
+        shadowRadius: 4,
+        elevation: 2,
+    },
+    imagem: {
+        width: 80,
+        height: 80,
+        marginRight: 12,
+    },
+    info: {
+        flex: 1,
+        justifyContent: 'space-between',
+    },
+    nome: {
+        fontSize: 16,
+        fontWeight: 'bold',
+        color: colors.texto,
+    },
+    descricao: {
+        color: colors.cinza,
+        fontSize: 14,
+    },
+    preco: {
+        fontSize: 16,
+        fontWeight: '600',
+        color: colors.primary,
+        marginTop: 4,
+    },
+    botao: {
+        marginTop: 8,
+        backgroundColor: colors.primary,
+        padding: 8,
+        borderRadius: 6,
+        alignItems: 'center',
+    },
+    botaoTexto: {
+        color: colors.branco,
+        fontWeight: 'bold',
+    },
 });

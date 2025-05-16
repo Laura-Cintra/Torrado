@@ -3,7 +3,7 @@
         "id": 1,
         "name": "Café Expresso",
         "description": "Um café forte e concentrado para começar o dia.",
-        "image": "espresso.avif",
+        "image": "espresso.png",
         "price": 6.5
     },
     {

@@ -1,5 +1,5 @@
 export const imagens = {
-  "espresso.avif": require("../assets/espresso.avif"),
+  "espresso.png": require("../assets/espresso.png"),
   "cappuccino.png": require("../assets/cappuccino.png"),
   "latte.png": require("../assets/latte.png"),
   "mocha.png": require("../assets/mocha.png"),

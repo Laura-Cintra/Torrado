@@ -16,6 +16,9 @@ export default function Home() {
     useEffect(() => {
         async function carregarProdutos() {
             try {
+                //  apagar o storage antigo
+                // await AsyncStorage.removeItem('lmvProdutosLMV');
+
                 const dadosSalvos = await AsyncStorage.getItem('lmvProdutosLMV');
                 if (dadosSalvos) {
                     setlmvProdutosLMV(JSON.parse(dadosSalvos));
