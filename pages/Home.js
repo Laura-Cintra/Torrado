@@ -1,7 +1,6 @@
 import { useContext, useEffect, useState } from "react";
-import { FlatList, StyleSheet, Text, View } from "react-native";
+import { FlatList, StyleSheet, Text, View, TextInput } from "react-native";
 import { CartContext } from "../context/CartContext";
-import { TextInput } from "react-native-web";
 import colors from "../theme/colors";
 import CardItemCoffe from "../components/CardItemCoffe";
 import produtosJson from '../data/produtos.json'
@@ -13,6 +12,14 @@ export default function Home() {
     const [lmvProdutosLMV, setlmvProdutosLMV] = useState([])
     const { adicionarAoCarrinhoLMV } = useContext(CartContext)
 
+    console.log(lmvProdutosLMV)
+
+    // includes -> busca parcial | toLowerCase -> compara tudo com letra minuscula
+    const produtosFiltrados = lmvBuscaLMV !== '' ? lmvProdutosLMV.filter(item => 
+            item.name.toLowerCase().includes(lmvBuscaLMV.toLowerCase()) || 
+      item.description.toLowerCase().includes(lmvBuscaLMV.toLowerCase())
+        ) : lmvProdutosLMV
+    
 
     useEffect(() => {
         async function carregarProdutos() {
@@ -50,7 +57,7 @@ export default function Home() {
 
             </View>
             <FlatList
-                data={lmvProdutosLMV}
+                data={produtosFiltrados}
                 keyExtractor={(item) => item.id.toString()}
                 renderItem={({ item }) => (
                     <CardItemCoffe
