@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
         width: '100%',
         height: 50,
         backgroundColor: colors.marromClaro,
-        borderRadius: "20px",
+        borderRadius: 20,
         paddingHorizontal: 12,
         marginBottom: 16,
         color: colors.texto

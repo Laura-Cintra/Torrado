@@ -28,7 +28,8 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         backgroundColor: colors.branco,
         marginRight: 10,
-        borderRadius: "20px",
+        overflow: 'hidden',
+        borderRadius: 20,
         padding: 12,
         marginBottom: 12,
         shadowColor: '#000',
@@ -64,7 +65,7 @@ const styles = StyleSheet.create({
         marginTop: 8,
         backgroundColor: colors.primary,
         padding: 8,
-        borderRadius: "8px",
+        borderRadius: 8,
         alignItems: 'center',
     },
     botaoTexto: {
