@@ -2,9 +2,14 @@ import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { imagens } from "../assets/images";
 import colors from "../theme/colors";
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import { useContext } from "react";
+import { CartContext } from "../context/CartContext";
 
 export default function CardItemCart({ produto, adicionar, tirar }) {
-    const quantidade = 0
+    const { lmvCarrinhoLMV } = useContext(CartContext);
+    const itemNoCarrinho = lmvCarrinhoLMV.find(p => p.id === produto.id);
+    const lmvQuantidade = itemNoCarrinho ? itemNoCarrinho.quantidade : 0;
+ 
     return (
         <View style={styles.card}>
             <Image
@@ -18,10 +23,10 @@ export default function CardItemCart({ produto, adicionar, tirar }) {
                     <Text style={styles.preco}>R$ {produto.price.toFixed(2)}</Text>
                 </View>
                 <View style={styles.controleQuantidade}>
-                    <TouchableOpacity onPress={() => tirar(produto)} style={styles.botao}>
+                    <TouchableOpacity onPress={() => tirar(produto.id)} style={styles.botao}>
                         <Ionicons name="remove" size={20} color="#000" />
                     </TouchableOpacity>
-                    <Text style={styles.quantidade}>{quantidade || 1}</Text>
+                    <Text style={styles.quantidade}>{lmvQuantidade || 1}</Text>
                     <TouchableOpacity onPress={() => adicionar(produto)} style={styles.botao}>
                         <Ionicons name="add" size={20} color="#000" />
                     </TouchableOpacity>

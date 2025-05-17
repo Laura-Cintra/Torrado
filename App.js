@@ -12,6 +12,7 @@ const Tab = createBottomTabNavigator();
 
 function MainTabs() {
   const { lmvCarrinhoLMV } = useContext(CartContext);
+  const totalItens = lmvCarrinhoLMV.reduce((total, item) => total + item.quantidade, 0);
 
   return (
     <Tab.Navigator
@@ -36,7 +37,7 @@ function MainTabs() {
         name="Carrinho"
         component={Cart}
         options={{
-          tabBarBadge: lmvCarrinhoLMV.length > 0 ? lmvCarrinhoLMV.length : null,
+          tabBarBadge: lmvCarrinhoLMV.length > 0 ? totalItens : null,
         }}
       />
     </Tab.Navigator>

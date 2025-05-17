@@ -7,7 +7,9 @@ import CardItemCart from "../components/CardItemCart";
 
 export default function Cart({ navigation }) {
     const { lmvCarrinhoLMV, adicionarAoCarrinhoLMV, removerDoCarrinhoLMV } = useContext(CartContext);
-
+    const lmvTotalCarrinho = lmvCarrinhoLMV.reduce((total, item) => {
+        return total + item.price * item.quantidade;
+    }, 0);
     return (
         <View style={styles.container}>
             <TouchableOpacity onPress={() => navigation.navigate('Home')} style={{ marginBottom: 20 }}>
@@ -28,12 +30,27 @@ export default function Cart({ navigation }) {
                 )}
                 contentContainerStyle={styles.containerCarrinho}
                 ListFooterComponent={
-                    <View style={styles.containerPreco}>
-                        <Text style={styles.tituloTotal}>Total</Text>
-                        <Text style={styles.precoTotal}>R$ 50,00</Text>
+                    lmvCarrinhoLMV.length > 0 && (
+                        <View style={styles.containerPreco}>
+                            <Text style={styles.tituloTotal}>Total</Text>
+                            <Text style={styles.precoTotal}>R$ {lmvTotalCarrinho.toFixed(2)}</Text>
+                        </View>
+                    )
+                }
+                ListEmptyComponent={
+                    <View style={{ alignItems: 'center', marginTop: 40 }}>
+                        <Ionicons name="cart-outline" size={48} color="#ccc" />
+                        <Text style={{ fontSize: 16, color: '#888', marginTop: 8 }}>
+                            Seu carrinho está vazio ☕
+                        </Text>
+                        <Text style={{ fontSize: 14, color: '#aaa' }}>
+                            Que tal adicionar um café delicioso?
+                        </Text>
                     </View>
                 }
             />
+
+
         </View>
     );
 }

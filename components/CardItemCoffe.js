@@ -3,8 +3,6 @@ import colors from "../theme/colors";
 import { imagens } from '../assets/images';
 
 export default function CardItemCoffe({ produto, aoAdicionar }) {
-    console.log("Imagem esperada:", produto.image);
-    console.log("Imagem encontrada:", imagens[produto.image]);
 
     return (
         <View style={styles.card}>
