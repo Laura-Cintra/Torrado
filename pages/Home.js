@@ -1,11 +1,12 @@
 import { useContext, useEffect, useState } from "react";
-import { FlatList, StyleSheet, Text, View, TextInput } from "react-native";
+import { FlatList, StyleSheet, Text, View, Modal, Pressable, Image } from "react-native";
 import { CartContext } from "../context/CartContext";
 import colors from "../theme/colors";
 import CardItemCoffe from "../components/CardItemCoffe";
+import SearchBar from '../components/SearchBar';
 import produtosJson from '../data/produtos.json'
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import Ionicons from 'react-native-vector-icons/Ionicons';
+import ItemModal from "../components/ItemModal";
 
 export default function Home() {
     const [lmvBuscaLMV, setlmvBuscaLMV] = useState('')
@@ -13,6 +14,9 @@ export default function Home() {
     const { adicionarAoCarrinhoLMV } = useContext(CartContext)
 
     console.log(lmvProdutosLMV)
+
+    const [lmvModalVisivel, setlmvModalVisivel] = useState(false);
+    const [lmvProdutoSelecionado, setlmvProdutoSelecionado] = useState(null);
 
     // includes -> busca parcial | toLowerCase -> compara tudo com letra minuscula
     const produtosFiltrados = lmvBuscaLMV !== '' ? lmvProdutosLMV.filter(item => 
@@ -41,21 +45,27 @@ export default function Home() {
         carregarProdutos();
     }, []);
 
+    function abrirModal(produto) {
+        setlmvProdutoSelecionado(produto);
+        setlmvModalVisivel(true);
+    }
+
+    function fecharModal() {
+        setlmvModalVisivel(false);
+        setlmvProdutoSelecionado(null);
+    }
+
 
     return (
         <View style={styles.container}>
             <Text style={styles.titulo}>Bem-vindo ao Torrado!</Text>
-            <View style={styles.containerSearch}>
-                <Ionicons name="search" size={20} color={colors.branco} style={styles.searchIcon} />
-                <TextInput
-                    style={styles.inputSearch}
-                    placeholder="Buscar cafés ou descrições..."
-                    placeholderTextColor={colors.cinzaEscuro}
-                    value={lmvBuscaLMV}
-                    onChangeText={setlmvBuscaLMV}
-                />
+            
+            <SearchBar
+                value={lmvBuscaLMV}
+                onChangeText={setlmvBuscaLMV}
+                placeholder="Buscar cafés ou descrições..."
+            />
 
-            </View>
             <FlatList
                 data={produtosFiltrados}
                 keyExtractor={(item) => item.id.toString()}
@@ -63,11 +73,18 @@ export default function Home() {
                     <CardItemCoffe
                         produto={item}
                         aoAdicionar={() => adicionarAoCarrinhoLMV(item)}
+                        aoPressionar={abrirModal}
                     />
                 )}
                 contentContainerStyle={styles.lista}
-
             />
+
+            <ItemModal
+                visivel={lmvModalVisivel}
+                produto={lmvProdutoSelecionado}
+                onClose={fecharModal}
+            />
+
         </View>
     )
 }
@@ -84,27 +101,6 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         marginBottom: 16,
         color: colors.texto,
-    },
-    containerSearch: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        width: '100%',
-        height: 50,
-        backgroundColor: colors.marromClaro,
-        borderRadius: 20,
-        paddingHorizontal: 12,
-        marginBottom: 16,
-        color: colors.texto
-        // borderColor: colors.texto,
-        // borderWidth: 1,
-    },
-    inputSearch: {
-        flex: 1,
-        marginLeft: 8,
-        color: colors.branco,
-        borderWidth: 0,
-        height: '100%',
-        outlineStyle: 'none'
     },
     lista: {
         paddingBottom: 100,

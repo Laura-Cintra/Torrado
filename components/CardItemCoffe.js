@@ -2,24 +2,26 @@ import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import colors from "../theme/colors";
 import { imagens } from '../assets/images';
 
-export default function CardItemCoffe({ produto, aoAdicionar }) {
+export default function CardItemCoffe({ produto, aoAdicionar, aoPressionar}) {
 
     return (
-        <View style={styles.card}>
-            <Image
-                source={imagens[produto.image]}
-                style={styles.imagem}
-                resizeMode="contain"
-            />
-            <View style={styles.info}>
-                <Text style={styles.nome}>{produto.name}</Text>
-                <Text style={styles.descricao}>{produto.description}</Text>
-                <Text style={styles.preco}>R$ {produto.price.toFixed(2)}</Text>
-                <TouchableOpacity style={styles.botao} onPress={aoAdicionar}>
-                    <Text style={styles.botaoTexto}>Adicionar</Text>
-                </TouchableOpacity>
+        <TouchableOpacity onPress={() => aoPressionar(produto)}>
+            <View style={styles.card}>
+                <Image
+                    source={imagens[produto.image]}
+                    style={styles.imagem}
+                    resizeMode="contain"
+                />
+                <View style={styles.info}>
+                    <Text style={styles.nome}>{produto.name}</Text>
+                    <Text style={styles.descricao}>{produto.description}</Text>
+                    <Text style={styles.preco}>R$ {produto.price.toFixed(2)}</Text>
+                    <TouchableOpacity style={styles.botao} onPress={aoAdicionar}>
+                        <Text style={styles.botaoTexto}>Adicionar</Text>
+                    </TouchableOpacity>
+                </View>
             </View>
-        </View>
+        </TouchableOpacity>
     );
 }
 
