@@ -6,7 +6,7 @@ import { CartContext } from "../context/CartContext";
 import CardItemCart from "../components/CardItemCart";
 
 export default function Cart({ navigation }) {
-    const { lmvCarrinhoLMV, adicionarAoCarrinhoLMV, removerDoCarrinhoLMV } = useContext(CartContext);
+    const { lmvCarrinhoLMV, adicionarAoCarrinhoLMV, removerDoCarrinhoLMV, limparCarrinhoLMV } = useContext(CartContext);
     const lmvTotalCarrinho = lmvCarrinhoLMV.reduce((total, item) => {
         return total + item.price * item.quantidade;
     }, 0);
@@ -31,10 +31,17 @@ export default function Cart({ navigation }) {
                 contentContainerStyle={styles.containerCarrinho}
                 ListFooterComponent={
                     lmvCarrinhoLMV.length > 0 && (
+                        <>
                         <View style={styles.containerPreco}>
                             <Text style={styles.tituloTotal}>Total</Text>
                             <Text style={styles.precoTotal}>R$ {lmvTotalCarrinho.toFixed(2)}</Text>
                         </View>
+                        <View>
+                            <TouchableOpacity style={styles.botao} onPress={limparCarrinhoLMV}>
+                                <Text style={styles.botaoTexto}>Excluir itens</Text>
+                            </TouchableOpacity>
+                        </View>
+                        </>
                     )
                 }
                 ListEmptyComponent={
@@ -98,5 +105,18 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: 'bold',
         color: colors.primary,
+    },
+    botao: {
+        marginTop: 8,
+        backgroundColor: colors.primary,
+        padding: 8,
+        borderRadius: 8,
+        alignItems: 'center',
+        textAlign: 'center',
+    },
+    botaoTexto: {
+        color: colors.branco,
+        fontWeight: 'bold',
     }
+
 });
