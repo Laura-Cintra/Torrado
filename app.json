@@ -3,7 +3,7 @@
     "name": "torrado",
     "slug": "torrado",
     "version": "1.0.0",
-    "orientation": "portrait",
+    "orientation": "default",
     "userInterfaceStyle": "light",
     "icon": "./assets/icon.png",
     "splash": {
@@ -19,11 +19,31 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "edgeToEdgeEnabled": true
+      "edgeToEdgeEnabled": true,
+      "package": "com.prisma.torrado"
     },
     "web": {
       "favicon": "./assets/icon.png"
     },
-    "newArchEnabled": true
+    "newArchEnabled": true,
+    "extra": {
+      "eas": {
+        "projectId": "400d0b61-97cb-4a47-8457-9a35ca761eb5",
+        "build": {
+          "preview": {
+            "android": {
+              "buildType": "apk"
+            }
+          },
+          "production": {
+            "android": {
+              "buildType": "aab",
+              "package": "com.torrado"
+            }
+          }
+        }
+      }
+    },
+    "owner": "saesminerais"
   }
 }
