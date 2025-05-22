@@ -1,9 +1,37 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useState, useEffect } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
   const [lmvCarrinhoLMV, setlmvCarrinhoLMV] = useState([]);
+
+  const STORAGE_KEY = "lmvCarrinhoLMV";
+
+  useEffect(() => {
+    const carregarCarrinho = async () => {
+      try {
+        const dadosSalvos = await AsyncStorage.getItem(STORAGE_KEY);
+        if (dadosSalvos) {
+          setlmvCarrinhoLMV(JSON.parse(dadosSalvos));
+        }
+      } catch (error) {
+        console.error("Erro ao carregar carrinho:", error);
+      }
+    };
+    carregarCarrinho();
+  }, []);
+
+  useEffect(() => {
+    const salvarCarrinho = async () => {
+      try {
+        await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(lmvCarrinhoLMV));
+      } catch (error) {
+        console.error("Erro ao salvar carrinho:", error);
+      }
+    };
+    salvarCarrinho();
+  }, [lmvCarrinhoLMV]);
 
   const adicionarAoCarrinhoLMV = (item) => {
     const itemExistente = lmvCarrinhoLMV.find((p) => p.id === item.id);
@@ -22,9 +50,7 @@ export const CartProvider = ({ children }) => {
     setlmvCarrinhoLMV((prev) =>
       prev
         .map((item) =>
-          item.id === id
-            ? { ...item, quantidade: item.quantidade - 1 }
-            : item
+          item.id === id ? { ...item, quantidade: item.quantidade - 1 } : item
         )
         .filter((item) => item.quantidade > 0)
     );
@@ -33,7 +59,6 @@ export const CartProvider = ({ children }) => {
   const limparCarrinhoLMV = () => {
     setlmvCarrinhoLMV([]);
   };
-
 
   return (
     <CartContext.Provider

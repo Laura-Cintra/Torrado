@@ -4,13 +4,52 @@ import { Ionicons } from "@expo/vector-icons";
 import { useContext, useEffect, useState } from "react";
 import { CartContext } from "../context/CartContext";
 import CardItemCart from "../components/CardItemCart";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function Cart({ navigation }) {
     const { lmvCarrinhoLMV, adicionarAoCarrinhoLMV, removerDoCarrinhoLMV, limparCarrinhoLMV } = useContext(CartContext);
     const lmvTotalCarrinho = lmvCarrinhoLMV.reduce((total, item) => {
         return total + item.price * item.quantidade;
     }, 0);
-    
+
+    const atualizarCarrinhoNoAsyncStorage = async (novoCarrinho) => {
+        try {
+            await AsyncStorage.setItem('lmvCarrinhoLMV', JSON.stringify(novoCarrinho));
+        } catch (erro) {
+            console.log('Erro ao salvar carrinho no AsyncStorage:', erro);
+        }
+    };
+
+    useEffect(() => {
+        async function carregarCarrinho() {
+            try {
+                const dadosSalvos = await AsyncStorage.getItem('lmvCarrinhoLMV');
+                if (dadosSalvos) {
+                    const dados = JSON.parse(dadosSalvos);
+                    adicionarAoCarrinhoLMV(dados);  
+                }
+            } catch (erro) {
+                console.log('Erro ao carregar produtos no carrinho:', erro);
+            }
+        }
+        carregarCarrinho();
+    }, atualizarCarrinhoNoAsyncStorage());
+
+    const handleAdicionarAoCarrinho = (item) => {
+        adicionarAoCarrinhoLMV(item);
+        atualizarCarrinhoNoAsyncStorage(lmvCarrinhoLMV);
+    };
+
+    const handleRemoverDoCarrinho = (itemId) => {
+        removerDoCarrinhoLMV(itemId);
+        atualizarCarrinhoNoAsyncStorage(lmvCarrinhoLMV);
+    };
+
+    const handleLimparCarrinho = () => {
+        limparCarrinhoLMV();
+        atualizarCarrinhoNoAsyncStorage([]);
+    };
+
     return (
         <View style={styles.container}>
             <TouchableOpacity onPress={() => navigation.navigate('Home')} style={{ marginBottom: 20 }}>
@@ -25,23 +64,23 @@ export default function Cart({ navigation }) {
                 renderItem={({ item }) => (
                     <CardItemCart
                         produto={item}
-                        adicionar={adicionarAoCarrinhoLMV}
-                        tirar={removerDoCarrinhoLMV}
+                        adicionar={handleAdicionarAoCarrinho}
+                        tirar={handleRemoverDoCarrinho}
                     />
                 )}
                 contentContainerStyle={styles.containerCarrinho}
                 ListFooterComponent={
                     lmvCarrinhoLMV.length > 0 && (
                         <>
-                        <View style={styles.containerPreco}>
-                            <Text style={styles.tituloTotal}>Total</Text>
-                            <Text style={styles.precoTotal}>R$ {lmvTotalCarrinho.toFixed(2)}</Text>
-                        </View>
-                        <View>
-                            <TouchableOpacity style={styles.botao} onPress={limparCarrinhoLMV}>
-                                <Text style={styles.botaoTexto}>Excluir itens</Text>
-                            </TouchableOpacity>
-                        </View>
+                            <View style={styles.containerPreco}>
+                                <Text style={styles.tituloTotal}>Total</Text>
+                                <Text style={styles.precoTotal}>R$ {lmvTotalCarrinho.toFixed(2)}</Text>
+                            </View>
+                            <View>
+                                <TouchableOpacity style={styles.botao} onPress={handleLimparCarrinho}>
+                                    <Text style={styles.botaoTexto}>Excluir itens</Text>
+                                </TouchableOpacity>
+                            </View>
                         </>
                     )
                 }
@@ -57,8 +96,6 @@ export default function Cart({ navigation }) {
                     </View>
                 }
             />
-
-
         </View>
     );
 }
@@ -119,5 +156,4 @@ const styles = StyleSheet.create({
         color: colors.branco,
         fontWeight: 'bold',
     }
-
 });
