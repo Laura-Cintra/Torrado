@@ -31,8 +31,9 @@ export default function Home() {
     lmvBuscaLMV !== ""
       ? lmvProdutosLMV.filter(
           (item) =>
-            item.name.toLowerCase().includes(lmvBuscaLMV.toLowerCase()) &&
-            item.description.toLowerCase().includes(lmvBuscaLMV.toLowerCase())
+          (item.name + " " + item.description)
+          .toLowerCase()
+          .includes(lmvBuscaLMV.toLowerCase())
         )
       : lmvProdutosLMV;
 

@@ -28,7 +28,7 @@
     "newArchEnabled": true,
     "extra": {
       "eas": {
-        "projectId": "400d0b61-97cb-4a47-8457-9a35ca761eb5",
+        "projectId": "1486b7e8-ad55-4d4c-86fa-53d20213be8e",
         "build": {
           "preview": {
             "android": {
@@ -44,6 +44,6 @@
         }
       }
     },
-    "owner": "saesminerais"
+    "owner": "maria0807"
   }
 }
