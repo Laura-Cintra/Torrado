@@ -28,6 +28,10 @@ Aplicativo mobile desenvolvido em React Native para a cafeteria Torrado
    ```bash
    npx expo start --tunnel
    ```
+3.1. Ou instale o .apk e rode em seu celular 
+   ``
+   torrado.apk
+   ``
 
 ## Tecnologias
 
