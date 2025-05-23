@@ -41,6 +41,7 @@ Aplicativo mobile desenvolvido em React Native para a cafeteria Torrado
 * `pages/`: Páginas principais do aplicativo
 * `context/`: Contextos para gerenciamento de estado global
 * `data/`: Dados estáticos utilizados no aplicativo
+* `theme/`: Estilo e temas aplicados no projeto
 
 ## Integrantes
 
