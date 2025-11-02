@@ -15,13 +15,12 @@ import SearchBar from "../components/SearchBar";
 import produtosJson from "../data/produtos.json";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import ItemModal from "../components/ItemModal";
+import { MotiText, MotiView } from "moti";
 
 export default function Home() {
   const [lmvBuscaLMV, setlmvBuscaLMV] = useState("");
   const [lmvProdutosLMV, setlmvProdutosLMV] = useState([]);
   const { adicionarAoCarrinhoLMV } = useContext(CartContext);
-
-  console.log(lmvProdutosLMV);
 
   const [lmvModalVisivel, setlmvModalVisivel] = useState(false);
   const [lmvProdutoSelecionado, setlmvProdutoSelecionado] = useState(null);
@@ -29,11 +28,10 @@ export default function Home() {
   // includes -> busca parcial | toLowerCase -> compara tudo com letra minuscula
   const produtosFiltrados =
     lmvBuscaLMV !== ""
-      ? lmvProdutosLMV.filter(
-          (item) =>
+      ? lmvProdutosLMV.filter((item) =>
           (item.name + " " + item.description)
-          .toLowerCase()
-          .includes(lmvBuscaLMV.toLowerCase())
+            .toLowerCase()
+            .includes(lmvBuscaLMV.toLowerCase())
         )
       : lmvProdutosLMV;
 
@@ -72,22 +70,36 @@ export default function Home() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.titulo}>Bem-vindo ao Torrado!</Text>
+      <MotiText
+        from={{ opacity: 0, translateY: -20 }}
+        animate={{ opacity: 1, translateY: 0 }}
+        transition={{ type: "timing", duration: 600 }}
+        style={styles.titulo}
+      >
+        Bem-vindo ao Torrado!
+      </MotiText>
 
-      <SearchBar
-        value={lmvBuscaLMV}
-        onChangeText={setlmvBuscaLMV}
-        placeholder="Buscar cafés ou descrições..."
-      />
+      <MotiView
+        from={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ type: "timing", duration: 400, delay: 300 }}
+      >
+        <SearchBar
+          value={lmvBuscaLMV}
+          onChangeText={setlmvBuscaLMV}
+          placeholder="Buscar cafés ou descrições..."
+        />
+      </MotiView>
 
       <FlatList
         data={produtosFiltrados}
         keyExtractor={(item) => item.id.toString()}
-        renderItem={({ item }) => (
+        renderItem={({ item, index }) => (
           <CardItemCoffe
             produto={item}
             aoAdicionar={() => adicionarAoCarrinhoLMV(item)}
             aoPressionar={abrirModal}
+            index={index}
           />
         )}
         contentContainerStyle={styles.lista}
