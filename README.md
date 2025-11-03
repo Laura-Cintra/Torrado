@@ -28,11 +28,6 @@ Aplicativo mobile desenvolvido em React Native para a cafeteria Torrado
    ```bash
    npx expo start --tunnel
    ```
-## Instalação via APK
-
-[📥 Baixar torrado.apk](torrado.apk)
-
-Depois de baixar, abra o arquivo no seu celular Android e siga as instruções exibidas para concluir a instalação.
 
 ## Tecnologias
 
