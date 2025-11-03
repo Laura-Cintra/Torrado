@@ -18,7 +18,7 @@ function MainTabs() {
     <Tab.Navigator
       screenOptions={({ route }) => ({
         headerShown: false,
-        // animation: "fade",
+        animation: "fade",
         tabBarActiveTintColor: colors.primary,
         tabBarInactiveTintColor: colors.cinzaClaro,
         tabBarStyle: { backgroundColor: colors.fundo },
