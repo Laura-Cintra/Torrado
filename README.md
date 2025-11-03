@@ -48,8 +48,18 @@ Depois de baixar, abra o arquivo no seu celular Android e siga as instruções e
 * `data/`: Dados estáticos utilizados no aplicativo
 * `theme/`: Estilo e temas aplicados no projeto
 
+## Animações com Moti
+
+O aplicativo utiliza a biblioteca **Moti** para criar animações suaves e modernas na interface.
+Ela é baseada no Reanimated 2, facilitando a criação de animações com pouco código e boa performance.
+
+As animações foram usadas para:
+
+* Suavizar a entrada de componentes na tela (fade in, slide, scale).
+* Dar sensação de movimento ao abrir páginas e carregar conteúdos.
+* Tornar a experiência do usuário mais fluida e agradável.
+
 ## Integrantes
 
     RM: 558843 Laura de Oliveira Cintra
     RM: 558832 Maria Eduarda Alves da Paixão
-    RM: 554456 Vinícius Saes de Souza
